@@ -1,0 +1,2 @@
+input_path: "/mnt/data/input.csv"
+output_path: "/mnt/data/output.parquet" 

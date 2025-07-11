@@ -1,0 +1,144 @@
+# 如果未在 "targets" 顶层映射中被覆盖，这是默认的 bundle 配置。
+bundle: # 必填。
+  name: string # 必填。
+  databricks_cli_version: string
+  cluster_id: string
+  deployment: Map
+  git:
+    origin_url: string
+    branch: string
+
+# 运行 bundle 时使用的身份信息
+run_as:
+  - user_name: <user-name>
+  - service_principal_name: <service-principal-name>
+
+# 需要包含的其他配置文件。
+include:
+  - '<some-file-or-path-glob-to-include>'
+  - '<another-file-or-path-glob-to-include>'
+
+# 需要包含或排除的其他文件或路径。
+sync:
+  include:
+    - '<some-file-or-path-glob-to-include>'
+    - '<another-file-or-path-glob-to-include>'
+  exclude:
+    - '<some-file-or-path-glob-to-exclude>'
+    - '<another-file-or-path-glob-to-exclude>'
+  paths:
+    - '<some-file-or-path-to-synchronize>'
+
+# 如果未在 targets 顶层映射中被覆盖，这是默认的 artifact 设置。
+artifacts:
+  <some-unique-artifact-identifier>:
+    build: string
+    dynamic_version: boolean
+    executable: string
+    files:
+      - source: string
+    path: string
+    type: string
+
+# 用于整个 bundle 的自定义变量。
+variables:
+  <some-unique-variable-name>:
+    description: string
+    default: string or complex
+    lookup: Map
+    type: string
+
+# 如果未在 targets 顶层映射中被覆盖，这是默认的 workspace 设置。
+workspace:
+  artifact_path: string
+  auth_type: string
+  azure_client_id: string # 仅适用于 Azure Databricks。
+  azure_environment: string # 仅适用于 Azure Databricks。
+  azure_login_app_id: string # 仅适用于 Azure Databricks。预留供将来使用。
+  azure_tenant_id: string # 仅适用于 Azure Databricks。
+  azure_use_msi: true | false # 仅适用于 Azure Databricks。
+  azure_workspace_resource_id: string # 仅适用于 Azure Databricks。
+  client_id: string # 仅适用于 AWS 上的 Databricks。
+  file_path: string
+  google_service_account: string # 仅适用于 Google Cloud 上的 Databricks。
+  host: string
+  profile: string
+  resource_path: string
+  root_path: string
+  state_path: string
+
+# 应用于 resources 映射中定义的资源的权限。
+permissions:
+  - level: <permission-level>
+    group_name: <unique-group-name>
+  - level: <permission-level>
+    user_name: <unique-user-name>
+  - level: <permission-level>
+    service_principal_name: <unique-principal-name>
+
+# 如果未在 targets 顶层映射中被覆盖，这是资源设置。
+resources:
+  apps:
+    <unique-app-name>:
+      # 参考 apps 的 REST API 创建请求负载文档。
+  clusters:
+    <unique-cluster-name>:
+      # 参考 clusters 的 REST API 创建请求负载文档。
+  dashboards:
+    <unique-dashboard-name>:
+      # 参考 dashboards 的 REST API 创建请求负载文档。
+  experiments:
+    <unique-experiment-name>:
+      # 参考 experiments 的 REST API 创建请求负载文档。
+  jobs:
+    <unique-job-name>:
+      # 参考 jobs 的 REST API 创建请求负载文档。
+  model_serving_endpoint:
+    <unique-model-serving-endpoint-name>:
+    # 参考模型服务端点的请求负载文档。
+  models:
+    <unique-model-name>:
+      # 参考 models（旧版）的 REST API 创建请求负载文档。
+  pipelines:
+    <unique-pipeline-name>:
+      # 参考 :re[LDP]（pipelines）的 REST API 创建请求负载文档。
+  quality_monitors:
+    <unique-quality-monitor-name>:
+    # 参考质量监控请求负载文档。
+  registered_models:
+    <unique-registered-model-name>:
+    # 参考注册模型请求负载文档。
+  schemas:
+    <unique-schema-name>:
+      # 参考 Unity Catalog schema 请求负载文档。
+  secret_scopes:
+    <unique-secret-scope-name>:
+      # 参考 secret scope 请求负载文档。
+  volumes:
+    <unique-volume-name>:
+    # 参考 Unity Catalog volume 请求负载文档。
+
+# 用于部署和工作流运行的目标。只能有一个目标设置为 "default: true"。
+targets:
+  <some-unique-programmatic-identifier-for-this-target>:
+    artifacts:
+      # 参考前面的 "artifacts" 语法。
+    bundle:
+      # 参考前面的 "bundle" 语法。
+    default: boolean
+    git: Map
+    mode: string
+    permissions:
+      # 参考前面的 "permissions" 语法。
+    presets:
+      <preset>: <value>
+    resources:
+      # 参考前面的 "resources" 语法。
+    sync:
+      # 参考前面的 "sync" 语法。
+    variables:
+      <preceding-unique-variable-name>: <non-default-value>
+    workspace:
+      # 参考前面的 "workspace" 语法。
+    run_as:
+      # 参考前面的 "run_as" 语法。

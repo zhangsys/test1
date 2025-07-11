@@ -1,0 +1,5 @@
+source:
+  name: hive_source
+  type: hive
+  config:
+    metastore_uri: thrift://hive-metastore:9083 

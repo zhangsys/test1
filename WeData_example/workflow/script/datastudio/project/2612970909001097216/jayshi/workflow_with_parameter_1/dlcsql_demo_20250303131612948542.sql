@@ -1,0 +1,173 @@
+--DLC SQL
+--******************************************************************--
+--author: jayshi@tencent.com
+--create time: 2025-03-03 13:16:12
+--******************************************************************--
+select "${country}";
+
+-- CREATE TABLE test.m_adf_pipeline_config_d (
+--   id BIGINT COMMENT 'Unique identifier',
+--   pipeline_name STRING COMMENT 'Name of the pipeline',
+--   chain_name STRING COMMENT 'Name of the chain the pipeline belongs to (if applicable)',
+--   data_source STRING COMMENT 'Name of the data source where data is ingested',
+--   source_entity STRING COMMENT 'Name of the object in the source that holds data (e.g., table_name)',
+--   target_entity STRING COMMENT 'Name of the object in the target that holds data (e.g., table_name)',
+--   select_query STRING COMMENT 'SQL query executed to fetch the data',
+--   delete_query STRING COMMENT 'SQL query executed to clear old data',
+--   is_full_load BOOLEAN COMMENT 'Indicator for full load or not',
+--   inserted_at TIMESTAMP COMMENT 'Timestamp when the record was inserted',
+--   updated_at TIMESTAMP COMMENT 'Timestamp when the record was last updated',
+--   is_active BOOLEAN COMMENT 'Indicator for ETL load activation status',
+--   needs_optimization BOOLEAN COMMENT 'indicator to indicate whether or not to optimize the table after the load is complete.',
+--   data_mart STRING COMMENT 'the data mart specified for the table.')
+
+-- select * from test.m_adf_pipeline_config_d;
+
+-- INSERT INTO test.m_adf_pipeline_config_d (
+--   id,
+--   pipeline_name,
+--   chain_name,
+--   data_source,
+--   source_entity,
+--   target_entity,
+--   select_query,
+--   delete_query,
+--   is_full_load,
+--   inserted_at,
+--   updated_at,
+--   is_active,
+--   needs_optimization,
+--   data_mart
+-- )
+-- VALUES (
+--   1,
+--   'pl_resa_tables_ingestion',
+--   'etl_phase_2',
+--   'MOM',
+--   'sa_customer',
+--   'sa_customer',
+--   'select sc.* from rms132.sa_customer sc inner join rms132.sa_tran_head sth on sc.tran_seq_no = sth.tran_seq_no and sc.day=sth.day where trunc(sth.update_datetime) >= trunc(sysdate-2)',
+--   'delete from [db].sa_customer where tran_seq_no in (select tran_seq_no from vw_sa_customer)',
+--   false,
+--   TIMESTAMP '2023-09-22T06:47:57.148+00:00',
+--   TIMESTAMP '2024-01-23T07:24:02.450+00:00',
+--   true,
+--   false,
+--   'Sales'
+-- );
+
+
+
+--     SELECT * 
+--     FROM test.m_adf_pipeline_config_d 
+--     WHERE lower(pipeline_name) = 'pl_resa_tables_ingestion' 
+--     AND is_active = true ;
+
+
+-- INSERT INTO test.m_adf_pipeline_config_d (
+--   id,
+--   pipeline_name,
+--   chain_name,
+--   data_source,
+--   source_entity,
+--   target_entity,
+--   select_query,
+--   delete_query,
+--   is_full_load,
+--   inserted_at,
+--   updated_at,
+--   is_active,
+--   needs_optimization,
+--   data_mart
+-- )
+-- VALUES (
+--   100000,
+--   'pl_test',
+--   'test',
+--   'test',
+--   'source_test',
+--   'target_test',
+--   'SELECT 1 as a,2 as b FROM dual',
+--   'SELECT 1 as a,2 as b FROM dual',
+--   false,
+--   TIMESTAMP '2023-01-01T06:47:57.148+00:00',
+--   TIMESTAMP '2023-01-01T06:47:57.148+00:00',
+--   true,
+--   false,
+--   'Sales'
+-- );
+
+
+
+-- INSERT INTO test.m_adf_pipeline_config_d (
+--   id,
+--   pipeline_name,
+--   chain_name,
+--   data_source,
+--   source_entity,
+--   target_entity,
+--   select_query,
+--   delete_query,
+--   is_full_load,
+--   inserted_at,
+--   updated_at,
+--   is_active,
+--   needs_optimization,
+--   data_mart
+-- )
+-- VALUES 
+-- -- 记录 1 (id = 3)
+-- (
+--   3,
+--   'pl_resa_tables_ingestion',
+--   'etl_phase_2',
+--   'MOM',
+--   'sa_tran_item',
+--   'sa_tran_item',
+--   'select sti.* from rms132.sa_tran_item sti inner join rms132.sa_tran_head sth on sti.tran_seq_no = sth.tran_seq_no and sti.day=sth.day where trunc(sth.update_datetime) >= trunc(sysdate-2)',
+--   'delete from [db].sa_tran_item where tran_seq_no in (select tran_seq_no from vw_sa_tran_item)',
+--   false,
+--   TIMESTAMP '2023-09-22T06:47:57.148+00:00',
+--   TIMESTAMP '2024-01-23T07:24:02.450+00:00',
+--   true,
+--   false,
+--   'Sales'
+-- ),
+-- -- 记录 2 (id = 4)
+-- (
+--   4,
+--   'pl_resa_tables_ingestion',
+--   'etl_phase_2',
+--   'MOM',
+--   'sa_tran_disc',
+--   'sa_tran_disc',
+--   'select std.store, std.day, std.tran_seq_no, std.item_seq_no, std.discount_seq_no, std.rms_promo_type, std.promotion, std.disc_type, std.coupon_no, std.coupon_ref_no, std.qty, std.unit_discount_amt, std.standard_qty, std.standard_unit_disc_amt, std.ref_no13, std.ref_no14, std.ref_no15, std.ref_no16, std.error_ind, std.uom_quantity, std.catchweight_ind, std.promo_comp as promo_com from rms132.sa_tran_disc std inner join rms132.sa_tran_head sth on std.tran_seq_no = sth.tran_seq_no and std.day = sth.day where trunc(sth.update_datetime) >= trunc(sysdate-2)',
+--   'delete from [db].sa_tran_disc where tran_seq_no in (select tran_seq_no from vw_sa_tran_disc)',
+--   false,
+--   TIMESTAMP '2023-09-22T06:47:57.148+00:00',
+--   TIMESTAMP '2024-01-23T07:24:02.450+00:00',
+--   true,
+--   false,
+--   'Sales'
+-- ),
+-- -- 记录 3 (id = 5)
+-- (
+--   5,
+--   'pl_resa_tables_ingestion',
+--   'etl_phase_2',
+--   'MOM',
+--   'sa_tran_tender',
+--   'sa_tran_tender',
+--   'select stt.* from rms132.sa_tran_tender stt inner join rms132.sa_tran_head sth on stt.tran_seq_no = sth.tran_seq_no and sth.day = stt.day where trunc(sth.update_datetime) >= trunc(sysdate-2)',
+--   'delete from [db].sa_tran_tender where tran_seq_no in (select tran_seq_no from vw_sa_tran_tender)',
+--   false,
+--   TIMESTAMP '2023-09-22T06:47:57.148+00:00',
+--   TIMESTAMP '2024-01-23T07:24:02.450+00:00',
+--   true,
+--   false,
+--   'Sales'
+-- );
+
+select * from test.m_adf_pipeline_config_d;
+
+select * from test.target_test;

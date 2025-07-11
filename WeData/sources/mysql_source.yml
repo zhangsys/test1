@@ -1,0 +1,9 @@
+source:
+  name: mysql_source
+  type: mysql
+  config:
+    host: 10.0.0.1
+    port: 3306
+    database: demo
+    user: root
+    password: "${var.mysql_password}" 

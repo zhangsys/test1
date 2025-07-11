@@ -1,0 +1,60 @@
+bundle:
+  name: my_databricks_project
+
+resources:
+  clusters:
+    etl-cluster:
+      spark_version: "13.3.x-scala2.12"
+      node_type_id: "i3.xlarge"
+      num_workers: 2
+      autotermination_minutes: 30
+    prod-cluster:
+      spark_version: "14.3.x-scala2.12"
+      node_type_id: "i3.2xlarge"
+      num_workers: 4
+      autotermination_minutes: 60
+
+notebooks:
+  - path: notebooks/etl_notebook.py
+  - path: notebooks/test_notebook.py
+  - path: notebooks/etl_sql_notebook.sql
+  - path: notebooks/etl_scala_notebook.scala
+
+pipelines:
+  - path: pipelines/my_pipeline.yaml
+
+workflows:
+  - path: workflows/my_job.yaml
+
+libraries:
+  - path: libraries/requirements.txt
+
+variables:
+  input_path:
+    description: "输入路径"
+    default: "/mnt/dev/input.csv"
+  output_path:
+    description: "输出路径"
+    default: "/mnt/dev/output.parquet"
+  catalog:
+    description: "数据目录"
+    default: "dev_catalog"
+
+targets:
+  staging:
+    default: true
+    resources:
+      clusters:
+        default: etl-cluster
+    variables:
+      input_path: "/mnt/dev/input.csv"
+      output_path: "/mnt/dev/output.parquet"
+      catalog: "dev_catalog"
+  prod:
+    resources:
+      clusters:
+        default: prod-cluster
+    variables:
+      input_path: "/mnt/prod/input.csv"
+      output_path: "/mnt/prod/output.parquet"
+      catalog: "prod_catalog" 

@@ -1,0 +1,4 @@
+udfs:
+  - name: my_udf
+    class: com.demo.udf.MyUDF
+    jar: resources/demo_udf.jar 

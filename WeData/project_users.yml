@@ -1,0 +1,7 @@
+users:
+  - name: jayshi@tencent.com
+    role: owner
+  - name: alice@tencent.com
+    role: developer
+  - name: bob@tencent.com
+    role: developer 

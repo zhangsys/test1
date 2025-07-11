@@ -1,0 +1,10 @@
+pipeline:
+  name: my_pipeline
+  description: "Example pipeline"
+  tasks:
+    - name: etl_task
+      notebook: ../notebooks/etl_notebook.py
+      cluster: ../infrastructure/cluster.yaml
+      parameters:
+        input_path: ${input_path}
+        output_path: ${output_path} 

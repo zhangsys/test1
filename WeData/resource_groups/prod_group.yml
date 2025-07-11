@@ -1,0 +1,4 @@
+resource_group:
+  name: prod_group
+  type: yarn
+  env_package: environments/requirements_prod.txt 

@@ -1,0 +1,7 @@
+parameters:
+  - name: country
+    value: my
+    description: "国家参数"
+  - name: mysql_password
+    value: "changeme"
+    description: "MySQL 数据库密码" 

@@ -1,0 +1,4 @@
+resource_group:
+  name: dev_group
+  type: yarn
+  env_package: environments/requirements_dev.txt 

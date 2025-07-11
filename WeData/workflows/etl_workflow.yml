@@ -1,0 +1,43 @@
+workflow:
+  name: etl_workflow
+  description: "ETL 主流程"
+  schedule:
+    type: daily
+    start_time: "01:00"
+    end_time: "23:59"
+    timezone: "UTC+7"
+  parameters:
+    - name: country
+      value: my
+  tasks:
+    - name: extract_mysql
+      type: sql
+      script: scripts/extract_mysql.sql
+      datasource: mysql_source
+      resource_group: dev_group
+      alerts:
+        - type: email
+          receivers: ["alice@tencent.com"]
+          on: [failed]
+    - name: transform_py
+      type: python
+      script: scripts/transform.py
+      resource_group: dev_group
+      alerts:
+        - type: webhook
+          url: "https://alert.example.com"
+          on: [failed, success]
+    - name: load_hive
+      type: sql
+      script: scripts/load_hive.sql
+      datasource: hive_source
+      resource_group: dev_group
+      alerts:
+        - type: email
+          receivers: ["bob@tencent.com"]
+          on: [failed]
+  dependencies:
+    - from: extract_mysql
+      to: transform_py
+    - from: transform_py
+      to: load_hive 

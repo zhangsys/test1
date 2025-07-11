@@ -1,0 +1,18 @@
+bundle:
+  name: wedata_asset_bundle_demo
+  description: "WeData Asset Bundle Example"
+  project_space:
+    name: CPAXTRA_BIG_DATA
+    owner: jayshi@tencent.com
+    engine: spark
+    parameters:
+      env: dev
+      region: ap-singapore
+  include:
+    - project_users.yml
+    - project_params.yml
+    - sources/*.yml
+    - resource_groups/*.yml
+    - resources/udfs.yml
+    - environments/*.txt
+    - workflows/*.yml 

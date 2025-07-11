@@ -1,0 +1,11 @@
+job:
+  name: my_etl_job
+  tasks:
+    - task_key: run_etl
+      pipeline: ../pipelines/my_pipeline.yaml
+      parameters:
+        input_path: "/mnt/data/input.csv"
+        output_path: "/mnt/data/output.parquet"
+  schedule:
+    quartz_cron_expression: "0 0 * * * ?"
+    timezone_id: "UTC" 
